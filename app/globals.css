@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ── DESIGN TOKENS ──────────────────────────────────
+   Quiet-luxury monochrome: warm charcoal-black grounds,
+   ivory text, a restrained champagne-gold accent used
+   sparingly. Editorial serif display + clean sans body.  */
+:root {
+  --bg: #0c0b0a;           /* warm charcoal-black ground */
+  --bg-lift: #141210;      /* lifted panels / cards */
+  --bg-lift-2: #1b1815;    /* hover / elevated */
+  --line: rgba(239, 233, 223, 0.09);
+  --line-strong: rgba(239, 233, 223, 0.18);
+  --fg: #efe9df;           /* warm ivory text */
+  --fg-dim: #a89f8f;       /* secondary taupe */
+  --fg-mute: #8a8175;      /* muted labels */
+  --accent: #c8a86b;       /* champagne gold */
+  --accent-hi: #d8bd86;    /* lifted gold (hover) */
+  --accent-soft: rgba(200, 168, 107, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ambient depth: a whisper-soft warm vignette, no glow. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(55% 40% at 50% -6%, rgba(200, 168, 107, 0.06), transparent 70%),
+    radial-gradient(80% 60% at 50% 120%, rgba(0, 0, 0, 0.5), transparent 70%);
+}
+
+::selection {
+  background-color: var(--accent-soft);
+  color: #fbf7ee;
+}
+
+/* ── FONTS ──────────────────────────────────────────
+   --font-syne now maps to Fraunces (editorial serif display).
+   --font-mono maps to Inter — used for small letter-spaced
+   labels. Class names kept so existing markup needs no churn. */
+.font-syne {
+  font-family: var(--font-syne), "Iowan Old Style", Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.font-mono {
+  font-family: var(--font-inter), "Segoe UI", sans-serif;
+}
+
+/* Back-compat alias still referenced by some markup */
+.font-grotesk {
+  font-family: var(--font-inter), "Segoe UI", sans-serif;
+}
+
+/* Accent helper */
+.text-accent {
+  color: var(--accent);
+}
+
+@layer base {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button {
+    font: inherit;
+  }
+}
+
+/* ── WAVY SVG ANIMATIONS ────────────────────────── */
+@keyframes waveShift1 {
+  0%   { d: path("M0,120 C160,80 320,160 480,110 C600,72 720,130 900,85 L900,340 L0,340 Z"); }
+  50%  { d: path("M0,100 C140,140 300,70  480,125 C640,175 760,90  900,115 L900,340 L0,340 Z"); }
+  100% { d: path("M0,120 C160,80 320,160 480,110 C600,72 720,130 900,85 L900,340 L0,340 Z"); }
+}
+@keyframes waveShift2 {
+  0%   { d: path("M0,150 C180,115 360,175 540,135 C680,105 800,150 900,130 L900,340 L0,340 Z"); }
+  50%  { d: path("M0,140 C160,170 340,105 520,148 C680,185 800,120 900,155 L900,340 L0,340 Z"); }
+  100% { d: path("M0,150 C180,115 360,175 540,135 C680,105 800,150 900,130 L900,340 L0,340 Z"); }
+}
+@keyframes waveShift3 {
+  0%   { d: path("M0,175 C200,148 380,195 560,162 C700,138 820,170 900,158 L900,340 L0,340 Z"); }
+  50%  { d: path("M0,165 C180,190 360,148 540,175 C700,198 820,152 900,178 L900,340 L0,340 Z"); }
+  100% { d: path("M0,175 C200,148 380,195 560,162 C700,138 820,170 900,158 L900,340 L0,340 Z"); }
+}
+@keyframes waveShift4 {
+  0%   { d: path("M0,195 C220,175 400,208 580,188 C720,172 840,196 900,188 L900,340 L0,340 Z"); }
+  50%  { d: path("M0,188 C200,205 380,172 560,195 C720,215 840,180 900,200 L900,340 L0,340 Z"); }
+  100% { d: path("M0,195 C220,175 400,208 580,188 C720,172 840,196 900,188 L900,340 L0,340 Z"); }
+}
+
+.animate-wave-1 { animation: waveShift1 9s ease-in-out infinite; }
+.animate-wave-2 { animation: waveShift2 11s ease-in-out infinite; }
+.animate-wave-3 { animation: waveShift3 13s ease-in-out infinite; }
+.animate-wave-4 { animation: waveShift4 7s  ease-in-out infinite; }
